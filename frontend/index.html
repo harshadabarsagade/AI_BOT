@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI Helper Bot</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+      <!-- Brand -->
+      <div class="brand">
+
+        <div class="brand-icon">
+          🤖
+        </div>
+
+        <div class="brand-text">
+          <h2>Ask Gemini</h2>
+          <span>Your smart assistant</span>
+        </div>
+
+      </div>
+
+
+      <!-- New Chat -->
+      <button
+        class="new-chat-btn"
+        id="newChatBtn"
+      >
+        <span>＋</span>
+        New Chat
+      </button>
+
+
+      <!-- Main Menu -->
+      <nav class="menu">
+
+        <button class="menu-item active">
+          <span>💬</span>
+          <span class="menu-label">AI Chat</span>
+        </button>
+
+        <button class="menu-item">
+          <span>🎓</span>
+          <span class="menu-label">Study Helper</span>
+        </button>
+
+        <button class="menu-item">
+          <span>💻</span>
+          <span class="menu-label">Coding Helper</span>
+        </button>
+
+        <button class="menu-item">
+          <span>✍️</span>
+          <span class="menu-label">Writing Helper</span>
+        </button>
+
+        <button class="menu-item">
+          <span>📝</span>
+          <span class="menu-label">Summarizer</span>
+        </button>
+
+        <button class="menu-item">
+          <span>🌐</span>
+          <span class="menu-label">Translator</span>
+        </button>
+
+      </nav>
+
+
+      <!-- ================= CHAT HISTORY ================= -->
+
+      <div class="history-section">
+
+        <div class="history-title">
+          <span>🕘</span>
+          <span>Recent Chats</span>
+        </div>
+
+        <div
+          class="history-list"
+          id="historyList"
+        >
+          <!-- History will appear here -->
+        </div>
+
+      </div>
+
+
+      <!-- Sidebar Bottom -->
+
+      <div class="sidebar-bottom">
+
+        <button
+          id="themeBtn"
+          class="bottom-btn"
+        >
+          🌙 Dark Mode
+        </button>
+
+        <button
+          id="clearBtn"
+          class="bottom-btn danger"
+        >
+          🗑️ Clear Chat
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+      <!-- Header -->
+
+      <header class="header">
+
+        <div class="header-info">
+
+          <h1>AI Assistant</h1>
+
+          <p>
+            Ask anything. Type or speak naturally.
+          </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+          <button
+            id="voiceToggle"
+            class="icon-btn"
+            title="Voice On/Off"
+          >
+            🔊
+          </button>
+
+          <button
+            id="stopVoice"
+            class="icon-btn"
+            title="Stop Speaking"
+          >
+            ⏹️
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ================= CHAT ================= -->
+
+      <section
+        class="chat-container"
+        id="chatContainer"
+      >
+
+        <!-- Welcome Screen -->
+
+        <div
+          class="welcome"
+          id="welcome"
+        >
+
+          <div class="welcome-icon">
+            🤖
+          </div>
+
+          <h2>
+            How can I help you today?
+          </h2>
+
+          <p>
+            Ask me anything or use your microphone
+            to talk with me.
+          </p>
+
+
+          <div class="suggestions">
+
+            <button class="suggestion">
+              🎓 Explain JavaScript promises
+            </button>
+
+            <button class="suggestion">
+              💻 Help me fix my code
+            </button>
+
+            <button class="suggestion">
+              📝 Summarize this topic
+            </button>
+
+            <button class="suggestion">
+              ✍️ Write a professional email
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= TYPING ================= -->
+
+      <div
+        class="typing"
+        id="typing"
+      >
+
+        <div class="typing-dots">
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+        <p>
+          AI is thinking...
+        </p>
+
+      </div>
+
+
+      <!-- ================= INPUT ================= -->
+
+      <div class="input-area">
+
+        <div class="input-box">
+
+          <button
+            id="micBtn"
+            class="mic-btn"
+            title="Voice Input"
+          >
+            🎤
+          </button>
+
+
+          <textarea
+            id="messageInput"
+            placeholder="Ask me anything..."
+            rows="1"
+          ></textarea>
+
+
+          <button
+            id="sendBtn"
+            class="send-btn"
+            title="Send"
+          >
+            ➤
+          </button>
+
+        </div>
+
+
+        <div class="input-info">
+
+          <span id="voiceStatus">
+            Voice ready
+          </span>
+
+          <span>
+            AI can make mistakes. Check important information.
+          </span>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
