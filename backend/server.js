@@ -13,13 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "AI Helper Bot API is running 🚀"
-  });
+    res.json({
+        message: "AI Helper Bot API is running 🚀"
+    });
 });
 
 app.use("/api/ai", aiRoutes);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

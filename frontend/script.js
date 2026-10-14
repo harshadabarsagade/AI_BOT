@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/ai/chat";
+const API_URL = "https://ai-bot-s9mn.onrender.com/api/ai/chat";
 
 // DOM ELEMENT
 const chatContainer = document.getElementById("chatContainer");

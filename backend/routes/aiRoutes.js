@@ -1,3 +1,4 @@
+
 import express from "express";
 
 const router = express.Router();
@@ -6,40 +7,45 @@ router.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    if (!message || !message.trim()) {
+    if (typeof message !== "string" || !message.trim()) {
       return res.status(400).json({
         success: false,
         message: "Please enter a message."
       });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
       return res.status(500).json({
         success: false,
-        message: "Gemini API key is missing."
+        message: "Groq API key is missing. Check your .env file."
       });
     }
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
+      "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          contents: [
+          model: "openai/gpt-oss-20b",
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a helpful AI assistant. Explain things clearly in simple English or Hinglish when appropriate."
+            },
             {
               role: "user",
-              parts: [
-                {
-                  text: message
-                }
-              ]
+              content: message.trim()
             }
-          ]
+          ],
+          temperature: 0.7,
+          max_completion_tokens: 2048
         })
       }
     );
@@ -47,25 +53,27 @@ router.post("/chat", async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Gemini Error:", data);
+      console.error("Groq API Error:", response.status, data);
 
       return res.status(response.status).json({
         success: false,
-        message: data?.error?.message || "Gemini API error."
+        message:
+          data?.error?.message ||
+          `AI request failed (${response.status}).`
       });
     }
 
     const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      data?.choices?.[0]?.message?.content?.trim();
 
     if (!reply) {
-      return res.status(500).json({
+      return res.status(502).json({
         success: false,
-        message: "No response received from AI."
+        message: "AI returned no text. Please try again."
       });
     }
 
-    res.json({
+    return res.json({
       success: true,
       reply
     });
@@ -73,9 +81,9 @@ router.post("/chat", async (req, res) => {
   } catch (error) {
     console.error("Server Error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      message: "Something went wrong on the server."
+      message: "Unable to connect to the AI service."
     });
   }
 });
